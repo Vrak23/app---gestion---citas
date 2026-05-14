@@ -123,19 +123,6 @@
             </div>
             <div class="p-6 bg-slate-50/30 text-center border-t border-slate-50">
                 <a href="#" class="text-verde-agua font-black text-xs uppercase tracking-[0.2em] hover:underline">Ver todos los registros de citas →</a>
-=======
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
->>>>>>> b4fa35b969a1989cd6223addb5782e2084e9c66a
             </div>
         </div>
     </div>

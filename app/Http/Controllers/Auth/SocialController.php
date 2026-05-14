@@ -27,6 +27,7 @@ class SocialController extends Controller
                 'provider_name' => $provider,
                 'provider_token' => $socialUser->token,
                 'avatar' => $socialUser->getAvatar(),
+                'email_verified_at' => now(), // IMPORTANTE: Para saltar el middleware 'verified'
             ]);
 
             Auth::login($user);
