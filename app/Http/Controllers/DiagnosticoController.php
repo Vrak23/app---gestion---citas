@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 class DiagnosticoController extends Controller
 {
     public function index() {
-        return response()->json(Diagnostico::all());
+        return response()->json(Diagnostico::with(['cita', 'paciente', 'medico'])->get());
     }
+
     public function store(Request $request) {
         $data = $request->validate([
             'id_cita' => 'required|exists:citas,id_cita',
@@ -24,17 +25,20 @@ class DiagnosticoController extends Controller
         $diagnostico = Diagnostico::create($data);
         return response()->json(['mensaje' => 'Diagnóstico creado', 'data' => $diagnostico], 201);
     }
+
     public function show($id) {
-        $diagnostico = Diagnostico::find($id);
+        $diagnostico = Diagnostico::with(['cita', 'paciente', 'medico'])->find($id);
         if (!$diagnostico) return response()->json(['mensaje' => 'No encontrado'], 404);
         return response()->json($diagnostico);
     }
+
     public function update(Request $request, $id) {
         $diagnostico = Diagnostico::find($id);
         if (!$diagnostico) return response()->json(['mensaje' => 'No encontrado'], 404);
         $diagnostico->update($request->all());
         return response()->json(['mensaje' => 'Diagnóstico actualizado', 'data' => $diagnostico]);
     }
+
     public function destroy($id) {
         $diagnostico = Diagnostico::find($id);
         if (!$diagnostico) return response()->json(['mensaje' => 'No encontrado'], 404);

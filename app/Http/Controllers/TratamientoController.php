@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class TratamientoController extends Controller
 {
     public function index() {
-        return response()->json(Tratamiento::all());
+        return response()->json(Tratamiento::with(['diagnostico', 'medico'])->get());
     }
     public function store(Request $request) {
         $data = $request->validate([
@@ -23,17 +23,20 @@ class TratamientoController extends Controller
         $tratamiento = Tratamiento::create($data);
         return response()->json(['mensaje' => 'Tratamiento creado', 'data' => $tratamiento], 201);
     }
+
     public function show($id) {
-        $tratamiento = Tratamiento::find($id);
+        $tratamiento = Tratamiento::with(['diagnostico', 'medico'])->find($id);
         if (!$tratamiento) return response()->json(['mensaje' => 'No encontrado'], 404);
         return response()->json($tratamiento);
     }
+
     public function update(Request $request, $id) {
         $tratamiento = Tratamiento::find($id);
         if (!$tratamiento) return response()->json(['mensaje' => 'No encontrado'], 404);
         $tratamiento->update($request->all());
         return response()->json(['mensaje' => 'Tratamiento actualizado', 'data' => $tratamiento]);
     }
+
     public function destroy($id) {
         $tratamiento = Tratamiento::find($id);
         if (!$tratamiento) return response()->json(['mensaje' => 'No encontrado'], 404);

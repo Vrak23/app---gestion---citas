@@ -37,8 +37,8 @@ class Diagnostico extends Model
         return $this->belongsTo(Medico::class, 'id_medico', 'id_medico');
     }
 
-    public function tratamiento()
+    public function tratamientos()
     {
-        return $this->hasOne(Tratamiento::class, 'id_diagnostico', 'id_diagnostico');
+        return $this->hasMany(Tratamiento::class, 'id_diagnostico', 'id_diagnostico');
     }
 }

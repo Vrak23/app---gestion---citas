@@ -1,86 +1,47 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
-use App\Models\Medico;
-use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class CitaController extends Controller
 {
-    public function index()
-    {
-        $citas = Cita::with(['paciente', 'medico'])
-            ->orderByDesc('fecha_cita')
-            ->orderByDesc('hora_cita')
-            ->paginate(10);
-
-        return response()->json(
-        Cita::with(['paciente', 'medico'])->get()
-    );
+    public function index() {
+        return response()->json(Cita::with(['paciente', 'medico'])->get());
     }
 
-    public function create()
-    {
-        $pacientes = Paciente::all();
-        $medicos = Medico::all();
-
-        return view('citas.create', compact('pacientes', 'medicos'));
-    }
-
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
+    public function store(Request $request) {
+        $data = $request->validate([
             'id_paciente' => 'required|exists:pacientes,id_paciente',
             'id_medico' => 'required|exists:medicos,id_medico',
-            'fecha_cita' => 'required|date|after_or_equal:today',
-            'hora_cita' => 'required|date_format:H:i',
-            'estado' => 'nullable|string|max:50',
-            'motivo' => 'required|string|max:255',
+            'fecha_cita' => 'required|date',
+            'hora_cita' => 'required',
+            'estado' => 'in:pendiente,confirmada,cancelada,atendida',
+            'motivo' => 'required|string',
             'observaciones' => 'nullable|string',
-            'sala' => 'required|string|max:255',
+            'sala' => 'nullable|string',
         ]);
-
-        $validated['estado'] = $validated['estado'] ?? 'Pendiente';
-
-        Cita::create($validated);
-
-        return redirect()->route('dashboard')->with('success', 'Cita agendada correctamente.');
+        $cita = Cita::create($data);
+        return response()->json(['mensaje' => 'Cita creada', 'data' => $cita], 201);
     }
 
-    public function show(Cita $cita)
-    {
-        return response()->json($cita->load(['paciente', 'medico', 'diagnostico']));
+    public function show($id) {
+        $cita = Cita::with(['paciente', 'medico'])->find($id);
+        if (!$cita) return response()->json(['mensaje' => 'No encontrado'], 404);
+        return response()->json($cita);
     }
 
-    public function edit(Cita $cita)
-    {
-        return redirect()->route('dashboard');
+    public function update(Request $request, $id) {
+        $cita = Cita::find($id);
+        if (!$cita) return response()->json(['mensaje' => 'No encontrado'], 404);
+        $cita->update($request->all());
+        return response()->json(['mensaje' => 'Cita actualizada', 'data' => $cita]);
     }
 
-    public function update(Request $request, Cita $cita)
-    {
-        $validated = $request->validate([
-            'id_paciente' => 'sometimes|required|exists:pacientes,id_paciente',
-            'id_medico' => 'sometimes|required|exists:medicos,id_medico',
-            'fecha_cita' => 'sometimes|required|date',
-            'hora_cita' => 'sometimes|required|date_format:H:i',
-            'estado' => 'sometimes|required|string|max:50',
-            'motivo' => 'sometimes|required|string|max:255',
-            'observaciones' => 'nullable|string',
-            'sala' => 'sometimes|required|string|max:255',
-        ]);
-
-        $cita->update($validated);
-
-        return response()->json($cita->load(['paciente', 'medico']));
-    }
-
-    public function destroy(Cita $cita)
-    {
+    public function destroy($id) {
+        $cita = Cita::find($id);
+        if (!$cita) return response()->json(['mensaje' => 'No encontrado'], 404);
         $cita->delete();
-
-        return redirect()->back()->with('success', 'Cita cancelada correctamente.');
+        return response()->json(['mensaje' => 'Cita eliminada']);
     }
 }
