@@ -19,7 +19,7 @@ return new class extends Migration
     $table->string('telefono', 15);
     $table->string('correo')->unique();
     $table->string('licencia');
-    $table->integer('años_experiencia');
+    $table->integer('anios_experiencia');
     $table->string('horario_atencion');
     $table->timestamps();
 });

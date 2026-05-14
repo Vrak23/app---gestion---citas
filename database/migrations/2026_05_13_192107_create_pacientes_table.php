@@ -15,7 +15,7 @@ return new class extends Migration
     $table->id('id_paciente');
     $table->string('nombre');
     $table->string('apellido');
-    $table->string('dni', 8)->unique();
+    $table->string('dni', 9)->unique();
     $table->date('fecha_nacimiento');
     $table->string('genero');
     $table->string('telefono', 15);
