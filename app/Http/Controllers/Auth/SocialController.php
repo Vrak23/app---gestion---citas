@@ -11,6 +11,9 @@ class SocialController extends Controller
 {
     public function redirect($provider)
     {
+        if ($provider === 'facebook') {
+            return Socialite::driver($provider)->scopes(['email'])->redirect();
+        }
         return Socialite::driver($provider)->redirect();
     }
 

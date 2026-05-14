@@ -65,6 +65,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        .reveal-1 { animation-delay: 0.1s; }
+        .reveal-2 { animation-delay: 0.3s; }
+        .reveal-3 { animation-delay: 0.5s; }
+        .reveal-4 { animation-delay: 0.7s; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden selection:bg-verde-agua selection:text-white">
@@ -89,7 +101,6 @@
                     <div class="ml-10 flex items-center space-x-8">
                         <a href="#hero" class="text-slate-600 hover:text-verde-agua transition-colors text-base font-bold">Inicio</a>
                         <a href="#servicios" class="text-slate-600 hover:text-verde-agua transition-colors text-base font-bold">Especialidades</a>
-                        <a href="#contacto" class="text-slate-600 hover:text-verde-agua transition-colors text-base font-bold">Soporte</a>
                         
                         <div class="h-6 w-px bg-slate-200 mx-2"></div>
 
@@ -119,21 +130,21 @@
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <!-- Text Content -->
                 <div class="flex-1 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-verde-agua/10 text-verde-agua px-4 py-2 rounded-full text-sm font-black mb-6 border border-verde-agua/20">
+                    <div class="reveal reveal-1 inline-flex items-center gap-2 bg-verde-agua/10 text-verde-agua px-4 py-2 rounded-full text-sm font-black mb-6 border border-verde-agua/20">
                         <span class="relative flex h-2 w-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-verde-agua opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-verde-agua"></span>
                         </span>
-                        SISTEMA DE GESTIÓN HOSPITALARIA 2024
+                        SISTEMA DE GESTIÓN HOSPITALARIA 2026
                     </div>
-                    <h1 class="text-5xl lg:text-7xl font-black text-slate-800 leading-[1.1] tracking-tight mb-8">
+                    <h1 class="reveal reveal-2 text-5xl lg:text-7xl font-black text-slate-800 leading-[1.1] tracking-tight mb-8">
                         Tu salud, nuestra <br> 
                         <span class="text-gradient">máxima prioridad.</span>
                     </h1>
-                    <p class="text-lg lg:text-xl text-slate-500 font-semibold mb-10 max-w-2xl leading-relaxed">
+                    <p class="reveal reveal-3 text-lg lg:text-xl text-slate-500 font-semibold mb-10 max-w-2xl leading-relaxed">
                         Gestiona tus citas médicas, accede a tu historial clínico y mantente en contacto con tus especialistas de confianza en un solo lugar.
                     </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <div class="reveal reveal-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                         <a href="{{ route('register') }}" class="w-full sm:w-auto px-10 py-5 bg-verde-agua hover:bg-[#3d9a91] text-white font-black rounded-[2rem] shadow-2xl shadow-verde-agua/30 transition-all transform hover:-translate-y-1 text-lg flex items-center justify-center gap-3">
                             Agendar Cita Ahora
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -145,7 +156,7 @@
                 </div>
 
                 <!-- 3D Image -->
-                <div class="flex-1 relative">
+                <div class="flex-1 relative reveal reveal-2">
                     <div class="relative z-10 animate-float">
                         <img src="{{ asset('imágenes/assets/medical_login.png') }}" alt="SANAR + 3D Illustration" class="w-full max-w-xl mx-auto drop-shadow-[0_35px_35px_rgba(77,182,172,0.3)]">
                     </div>
@@ -223,7 +234,7 @@
                 </div>
             </div>
             <div class="text-center text-slate-500 font-black text-sm tracking-widest uppercase">
-                &copy; 2024 SANAR + | Todos los derechos reservados
+                &copy; 2026 SANAR + | Todos los derechos reservados
             </div>
         </div>
     </footer>

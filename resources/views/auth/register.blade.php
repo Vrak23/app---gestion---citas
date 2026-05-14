@@ -12,7 +12,7 @@
             </div>
             
             <div class="relative z-10 text-sm font-black uppercase tracking-widest text-slate-500">
-                &copy; 2024 SANAR + | Gestión Inteligente
+                &copy; 2026 SANAR + | Gestión Inteligente
             </div>
 
             <!-- Abstract circles -->

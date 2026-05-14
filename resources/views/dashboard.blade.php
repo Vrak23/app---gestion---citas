@@ -128,7 +128,7 @@
                 </table>
             </div>
             <div class="p-6 bg-slate-50/30 text-center border-t border-slate-50">
-                <a href="#" class="text-verde-agua font-black text-xs uppercase tracking-[0.2em] hover:underline">Ver todos los registros de citas →</a>
+                <a href="{{ route('citas.index') }}" class="text-verde-agua font-black text-xs uppercase tracking-[0.2em] hover:underline">Ver todos los registros de citas →</a>
             </div>
         </div>
     </div>
